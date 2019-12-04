@@ -27,7 +27,7 @@
     "gravatar": "^1.8.0",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.3.3",
-    "mongoose": "^5.7.7",
+    "mongoose": "^5.7.13",
     "mongoose-unique-validator": "^2.0.3",
     "request": "^2.88.0"
   },
