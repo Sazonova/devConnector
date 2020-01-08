@@ -73,7 +73,7 @@ router.post('/', [ auth,
         let profile = await Profile.findOne({ user: req.user.id });
         if(profile){
             //Update
-            profile = await Profile.useFindAndModify(
+            profile = await Profile.findOneAndUpdate(
                 { user: req.user.id },
                 { $set: profileFields },
                 { new: true }
@@ -131,6 +131,7 @@ router.get('/user/:user_id', async (req, res) => {
 router.delete('/', auth,  async (req, res) => {
     try {
         //@todo - remove user posts
+        await Post.deleteMany({ user: req.user.id});
         //Remove profile
         await Profile.findOneAndRemove({ user: req.user.id });
         //Remove user
@@ -146,7 +147,7 @@ router.delete('/', auth,  async (req, res) => {
 // @route  PUT api/profile/experience
 // @desc   Add profile expereience
 // @access Private
-router.put('/expereience', [ auth, [ 
+router.put('/experience', [ auth, [ 
  check('title', 'Title is required').not().isEmpty(),
  check('company', 'Company is required').not().isEmpty(),
  check('from', 'From is required').not().isEmpty()
